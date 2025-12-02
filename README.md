@@ -6,7 +6,6 @@ Guess Mate is an interactive web-based guessing game built with Flask and powere
 
 - **AI-Powered Guessing**: Utilizes Google's Gemini 2.0 Flash model to generate intelligent questions and make accurate guesses.
 - **Interactive Web Interface**: Clean, responsive UI with animations and progress tracking.
-- **Scoring System**: Earn up to 100 points based on how quickly the AI guesses your object (5 points deducted per question).
 - **Session Management**: Maintains game state across questions using Flask sessions.
 - **Asynchronous Processing**: Leverages async Flask for smooth AI interactions.
 
