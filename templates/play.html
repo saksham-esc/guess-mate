@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Mate - Question {{ qnum }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 50px 20px;
+            color: #fff;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .question {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideIn 0.5s ease-out, pulse 1.5s infinite;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .answer-form {
+            display: inline-block;
+            text-align: center;
+        }
+        .answer-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .answer-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .answer-button i {
+            margin-right: 10px;
+        }
+        .progress-bar {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049, #4CAF50);
+            background-size: 200% 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            animation: progressMove 2s infinite;
+        }
+        @keyframes progressMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-brain"></i> Guess Mate</h1>
+    {% if qnum > 0 %}
+    <div class="progress-bar">
+        <div class="progress" style="width: {{ (qnum / MAX_QUESTIONS) * 100 }}%;"></div>
+    </div>
+    {% endif %}
+    {% if qnum == 0 %}
+    <div class="question">Think of an object. I'll ask yes/no/I don't know questions to guess it.</div>
+    <form method="POST" class="answer-form">
+        <button type="submit" name="answer" value="start" class="answer-button"><i class="fas fa-play"></i>Start</button>
+    </form>
+    {% else %}
+    <div class="question">{{ question }}</div>
+    <form method="POST" class="answer-form">
+        <button type="submit" name="answer" value="Yes" class="answer-button"><i class="fas fa-check"></i>Yes</button>
+        <button type="submit" name="answer" value="No" class="answer-button"><i class="fas fa-times"></i>No</button>
+        <button type="submit" name="answer" value="I don't know" class="answer-button"><i class="fas fa-question"></i>I don't know</button>
+    </form>
+    {% endif %}
+</body>
+</html>
